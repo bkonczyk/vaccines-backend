@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 public class VaccineValidator {
 
     public void validateVaccineRequest(PersonVaccineRequest request) {
-        if (request.getNazwisko() == null || request.getNazwisko().isEmpty()) {
-            throw new CustomException("Surname cannot be empty");
-        }
+//        if (request.getNazwisko() == null || request.getNazwisko().isEmpty()) {
+//            throw new CustomException("Surname cannot be empty");
+//        }
     }
 }

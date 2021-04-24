@@ -11,7 +11,8 @@ public class PersonVaccineRequest {
 
     String id;
     String imie;
-//    @NotEmpty(message = "Surname should not be empty")
+
+    @NotEmpty(message = "Surname should not be empty")
     String nazwisko;
     String plec;
     String komentarze;
