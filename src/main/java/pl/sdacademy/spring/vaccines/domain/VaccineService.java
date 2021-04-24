@@ -11,11 +11,10 @@ import java.util.stream.Collectors;
 public class VaccineService {
 
     private final VaccineRepository repository;
+    private final VaccineValidator validator;
 
     void addVaccine(PersonVaccineRequest request) {
-        if (request.getNazwisko() == null || request.getNazwisko().isEmpty()) {
-            throw new CustomException("Surname cannot be empty");
-        }
+        validator.validateVaccineRequest(request);
         Vaccine vaccine = VaccineMapper.mapToVaccine(request);
         repository.save(vaccine);
     }
