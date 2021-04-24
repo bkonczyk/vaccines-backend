@@ -24,4 +24,14 @@ public class VaccineMapper {
             .setTyp(vaccine.getType())
             .setZyczenia(new ExtraWishesResponse(vaccine.isFirstWish(), vaccine.isSecondWish()));
     }
+
+    static void updateVaccine(Vaccine vaccine, PersonVaccineRequest request) {
+        vaccine.setName(request.getImie());
+        vaccine.setSurname(request.getNazwisko());
+        vaccine.setComments(request.getKomentarze());
+        vaccine.setSex(request.getPlec());
+        vaccine.setType(request.getTyp());
+        vaccine.setFirstWish(request.getZyczenia().isA());
+        vaccine.setSecondWish(request.getZyczenia().isB());
+    }
 }

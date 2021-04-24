@@ -30,7 +30,22 @@ public class VaccineController {
         return service.findAll();
     }
 
-    //1. Stworzyc DTO VaccineResponse
-    //2. Metoda serwisowa, ktora zwroci listę VaccineResponse + mapowanie
-    //3. Wystawić endpoint pod URL "/ludzie"
+    @DeleteMapping("/czlowiek/{id}")
+    public void delete(@PathVariable String id) {
+        log.info("Received request to remove person with id {}", id);
+        service.deleteById(id);
+    }
+
+    @GetMapping("/czlowiek/{id}")
+    public PersonVaccineResponse get(@PathVariable String id) {
+        log.info("Received request to get person with id {}", id);
+        return service.getById(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/czlowiek")
+    public void updateVaccineRequest(@RequestBody PersonVaccineRequest request) {
+        log.info("Received update request for a person id {}", request.getId());
+        service.updateById(request);
+    }
 }
