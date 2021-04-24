@@ -48,4 +48,10 @@ public class VaccineController {
         log.info("Received update request for a person id {}", request.getId());
         service.updateById(request);
     }
+
+    @GetMapping("/custom-exception")
+    public void throwCustomException() {
+        throw new CustomException("Thrown new custom exception");
+    }
+
 }

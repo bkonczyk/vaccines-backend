@@ -46,9 +46,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.1.5.Final</version> <!--dostępna może być nowsza wersja-->
+            <version>7.0.1.Final</version>
         </dependency>
 
     </dependencies>
