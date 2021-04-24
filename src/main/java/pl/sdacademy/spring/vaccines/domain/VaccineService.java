@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,6 +13,9 @@ public class VaccineService {
     private final VaccineRepository repository;
 
     void addVaccine(PersonVaccineRequest request) {
+        if (request.getNazwisko() == null || request.getNazwisko().isEmpty()) {
+            throw new CustomException("Surname cannot be empty");
+        }
         Vaccine vaccine = VaccineMapper.mapToVaccine(request);
         repository.save(vaccine);
     }
@@ -30,15 +32,16 @@ public class VaccineService {
     }
 
     public PersonVaccineResponse getById(String id) {
-        return repository.findById(id).map(VaccineMapper::mapToResponse).orElse(null);
+        return repository
+            .findById(id)
+            .map(VaccineMapper::mapToResponse)
+            .orElseThrow(() -> new PersonVaccineNotFoundException("Person with id: " + id + " doesn't exist"));
     }
 
     public void updateById(PersonVaccineRequest request) {
-        Optional<Vaccine> byId = repository.findById(request.getId());
-        if (byId.isEmpty()) {
-            return;
-        }
-        Vaccine vaccine = byId.get();
+        Vaccine vaccine = repository
+            .findById(request.getId())
+            .orElseThrow(() -> new PersonVaccineNotFoundException("Person with id: " + request.getId() + " doesn't exist"));
         VaccineMapper.updateVaccine(vaccine, request);
         repository.save(vaccine);
     }
